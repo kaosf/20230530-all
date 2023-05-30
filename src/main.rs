@@ -1,15 +1,15 @@
 #[derive(Debug)]
 struct EmptyError;
 
-fn all1(a: &[bool]) -> bool {
-    if a.is_empty() {
-        true
-    } else {
-        a[0] && all1(&a[1..])
-    }
-}
-
 fn all(a: &[bool]) -> Result<bool, EmptyError> {
+    fn all1(a: &[bool]) -> bool {
+        if a.is_empty() {
+            true
+        } else {
+            a[0] && all1(&a[1..])
+        }
+    }
+
     if a.is_empty() {
         Err(EmptyError)
     } else {
